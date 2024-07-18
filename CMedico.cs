@@ -28,7 +28,7 @@ namespace Hospital_Interzonal_de_Haedo
         public override string ToString()
         {
             string datos = base.ToString();
-            datos += "Especialidad :" + this.especialidad + "Servicio :" + this.servicio;
+            datos += " " + this.especialidad + " " + this.servicio;
             return datos;
         }
     }
