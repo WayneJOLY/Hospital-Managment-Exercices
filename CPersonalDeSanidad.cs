@@ -31,7 +31,7 @@ namespace Hospital_Interzonal_de_Haedo
         public override string ToString()
         {
             string datos=base.ToString();
-            datos += " Categoria Profecional :" + this.categoriaProfesional + "Numero de Matricula :" + this.numeroDeMatricula;
+            datos += "  " + this.categoriaProfesional + " " + this.numeroDeMatricula;
             return datos;
 
         }
