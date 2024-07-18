@@ -12,7 +12,7 @@ namespace Hospital_Interzonal_de_Haedo
         private string nombre;
         private string apellido;
         private uint aniDeIngreso;
-
+        public bool ESTA_EN_UN_SERVIVCIO;
         public CEmpleado(uint legajo, string nombre, string apellido, uint aniDeIngreso)
         {
             this.legajo = legajo;
@@ -42,7 +42,7 @@ namespace Hospital_Interzonal_de_Haedo
 
         public override string ToString()
         {
-            return "\nNombre :" + this.nombre + "Apellido :"+ this.apellido + "Legajo :" + this.legajo.ToString() + "Año de Ingreso :"+this.aniDeIngreso.ToString();
+            return "\n " + this.nombre + " "+ this.apellido + " " + this.legajo.ToString() + " "+this.aniDeIngreso.ToString();
         }
     }
 }
