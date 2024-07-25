@@ -18,13 +18,13 @@ namespace Hospital_Interzonal_de_Haedo
             ListaDeServicios = new ArrayList();
         }
 
-        public CEmpleado BuscarEmpleado(uint legajo)
+        public CEmpleado? BuscarEmpleado(uint legajo)
         {
             foreach (CEmpleado empleado in ListaDeTrabajadores)
             {
                 if (legajo == empleado.GetLegajo())
                 {
-                    return (CEmpleado)empleado;
+                    return empleado;
                 }
             }
             return null;
@@ -54,22 +54,23 @@ namespace Hospital_Interzonal_de_Haedo
 
         //-------------------------INICIO DE  FUNCIONES DE SERVICIO------------------------------------------
 
-        public CServicio BuscarServicio(CServicio servicio)
+        public CServicio? BuscarServicio(string codigo)
         {
             foreach(CServicio ser in ListaDeServicios)
             {
-                if(ser.getCodigo() == servicio.getCodigo()) { return servicio; }
+                if( codigo == ser.getCodigo())
+                { return ser; }
             }
             return null ;
         }
 
         public bool AgregarServicio(CServicio servicio)
         {
-            CServicio aux=BuscarServicio(servicio);
+            CServicio aux=BuscarServicio(servicio.getCodigo());
 
-            if(aux != null)
+            if(aux == null)
             {
-                ListaDeServicios.Add(aux);
+                ListaDeServicios.Add(servicio);
                 return true;
             }
             return false;
@@ -78,7 +79,7 @@ namespace Hospital_Interzonal_de_Haedo
         public bool AgregarEmpleadoAServicio(CEmpleado empleado,CServicio servicio) 
         {
             CEmpleado aux = BuscarEmpleado(empleado.GetLegajo());
-            CServicio auxServicio = BuscarServicio(servicio);
+            CServicio auxServicio = BuscarServicio(servicio.getCodigo());
 
             if(aux != null && auxServicio !=null) 
             {
@@ -91,7 +92,7 @@ namespace Hospital_Interzonal_de_Haedo
 
         public bool SacarEmpleadoAServicio(CEmpleado empleado, CServicio servicio)//NO ESTOY TOTALMENTE SEGURO SI ES CORRECTO
         {
-            CServicio auxServicio = BuscarServicio(servicio);
+            CServicio auxServicio = BuscarServicio(servicio.getCodigo());
             CEmpleado aux = BuscarEmpleado(empleado.GetLegajo());
             
 
@@ -115,22 +116,34 @@ namespace Hospital_Interzonal_de_Haedo
                     CMedico medico = (CMedico)empleado;
                     datos += medico.ToString();
                 }
+                else
                 if (empleado is CPersonalDeApoyo )
                 {
                     CPersonalDeApoyo medico = (CPersonalDeApoyo)empleado;
                     datos += medico.ToString();
-                }
+                }else
                 if (empleado is CPersonalDeSanidad)
                 {
                     CPersonalDeSanidad medico = (CPersonalDeSanidad)empleado;
                     datos += medico.ToString();
-                }
-                if (empleado is CEmpleado)
+                }else if(empleado is CEmpleado)
                 {
                     
                     datos += empleado.ToString();
                 }
                 //AUN NO TERMINA
+            }
+
+            return datos;
+        }
+
+        public string ListaDeServiciosDelHospital()
+        {
+            string datos = "\n\n DATOS DE LA LISTA DE SERVICIOS DEL HOSPITAL \n\n";
+
+            foreach(CServicio servicio in ListaDeServicios)
+            {
+                datos += servicio.ToString();
             }
 
             return datos;
