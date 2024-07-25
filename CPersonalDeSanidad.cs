@@ -8,9 +8,9 @@ namespace Hospital_Interzonal_de_Haedo
 {
     public class CPersonalDeSanidad : CEmpleado
     {
-        private uint legajo;
-        private string nombre;
-        private string apellido;
+        //private uint legajo;
+        //private string nombre;
+        //private string apellido;
         private uint aniDeIngreso;
         private string categoriaProfesional;
         private uint numeroDeMatricula;
@@ -20,9 +20,9 @@ namespace Hospital_Interzonal_de_Haedo
             this.categoriaProfesional = categoriaProfesional;
         }
 
-        public uint GetLegajo() { return legajo; }
-        public string GetNombre() { return nombre; }
-        public string GetApellido() { return apellido; } 
+        //public uint GetLegajo() { return legajo; }
+        //public string GetNombre() { return nombre; }
+        //public string GetApellido() { return apellido; } 
         public uint GetAniDeIngreso() {  return aniDeIngreso; }
         public string GetCategoriaProfesional() {  return categoriaProfesional; }
         public uint GetNumeDeMatricula(uint numeDeMatricula) {  return numeroDeMatricula; }
