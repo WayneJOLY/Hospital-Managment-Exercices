@@ -30,8 +30,9 @@ namespace Hospital_Interzonal_de_Haedo
             Console.WriteLine("[8] Listar los Datos de un Emplado y sus Servicios ");
             Console.WriteLine("[9] Eliminar a un Empleado ");
             Console.WriteLine("[10] Listar todos los Datos del Hospital ");
+            Console.WriteLine("[7] Listar de todos los Datos de los SERVICIOS del Hospital ");
 
-           return DarOpcion("Ingrese la Opcion Elegida");
+            return DarOpcion("Ingrese la Opcion Elegida");
         }
 
         public string DarOpcion(string mensaje) 
