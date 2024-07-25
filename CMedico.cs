@@ -8,12 +8,12 @@ namespace Hospital_Interzonal_de_Haedo
 {
     public class CMedico : CPersonalDeSanidad
     {
-        private uint legajo;
-        private string nombre;
-        private string apellido;
-        private uint aniDeIngreso;
-        private string categoriaProfesional;
-        private uint numeroDeMatricula;
+        //private uint legajo;
+        //private string nombre;
+        //private string apellido;
+        //private uint aniDeIngreso;
+        //private string categoriaProfesional;
+        //private uint numeroDeMatricula;
         private string especialidad;
         private string servicio;  //PARA SABER EN QUÉ SERVICIO ESTA TRABAJANDO
 
@@ -23,12 +23,13 @@ namespace Hospital_Interzonal_de_Haedo
             this.servicio = servicio ;
         }
 
-
+        public string GetEspecialidad() { return especialidad ; }
+        public string GetServicio() {  return servicio ; }
 
         public override string ToString()
         {
             string datos = base.ToString();
-            datos += " " + this.especialidad + " " + this.servicio;
+            datos += "\t\tESPECIALIDAD :" + this.especialidad + "\tSERVICIO   :" + this.servicio;
             return datos;
         }
     }
