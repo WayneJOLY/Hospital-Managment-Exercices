@@ -23,6 +23,7 @@ namespace Hospital_Interzonal_de_Haedo
             return this.puesto;
         }
 
+        public void SetPuesto(string puesto) { this.puesto = puesto; }
 
         public override string ToString()
         {
