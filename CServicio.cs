@@ -12,7 +12,7 @@ namespace Hospital_Interzonal_de_Haedo
         private string codigo;
         private string nombreDeServicio;
         private CMedico jefe;
-        private ArrayList ListaDeEmpleadosDelServicio;
+        public ArrayList ListaDeEmpleadosDelServicio;
         public CServicio(string codigo, string nombre, CMedico jefe)
         {
             this.codigo = codigo;
