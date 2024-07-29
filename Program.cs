@@ -22,6 +22,13 @@ namespace Hospital_Interzonal_de_Haedo
             
             CInterfaz interfaz= new CInterfaz();
             CHospital hospital= new CHospital();
+
+
+            float MONTO = 8000000;
+            CEmpleado.setMonto(MONTO);
+
+
+
             do
             {
                 opcion=char.Parse(interfaz.MostrarOpcion());
@@ -113,10 +120,28 @@ namespace Hospital_Interzonal_de_Haedo
                         break;
 
                     case '7':
-                        Console.WriteLine(hospital.ListaDeServiciosDelHospital());
+                        codigo = interfaz.DevlverUnString("Ingrese el Codigo Del Servicio");
+                        
+                        servicio = hospital.BuscarServicio(codigo);
+                        if(servicio!=null)
+                        {
+                            Console.WriteLine(servicio.ToString());
+                        }
+                        else
+                        {
+                            Console.WriteLine("\n NO SE ENCONTRO EL SERVICIO BUSCADO ");
+                        }
                         Console.ReadKey();
                         break;
-
+                    case '8':
+                        legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado");
+                        empleado = hospital.BuscarEmpleado(legajo);
+                        break;
+                    case '9':
+                        legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado  A Eliminar");
+                        empleado = hospital.BuscarEmpleado(legajo);
+                        hospital.EliminarEmpleado(empleado);
+                        break;
                 }
 
             }while (opcion != '0');
