@@ -20,7 +20,7 @@ namespace Hospital_Interzonal_de_Haedo
             Console.Clear();
 
 
-            Console.WriteLine("[1] Imgrese el Monton de Regerencia y El Bono Profecional del Sindicato ");
+            Console.WriteLine("[1] Ingrese el Monton de Regerencia y El Bono Profecional del Sindicato ");
             Console.WriteLine("[2] Registrar un Empleado ");
             Console.WriteLine("[3] Listar Los datos de Todos los Empleados del Hospital ");
             Console.WriteLine("[4] Registar un Servicio ");
@@ -49,8 +49,15 @@ namespace Hospital_Interzonal_de_Haedo
 
         public uint DevolverUnUint(string mensaje)
         {
-            Console.WriteLine(mensaje);
-            return uint.Parse(Console.ReadLine());
+
+            uint numero;
+            bool resultado;
+            do
+            {
+                Console.WriteLine(mensaje);
+                resultado = uint.TryParse(Console.ReadLine(), out numero);
+            } while (resultado ==false);
+            return numero;
         }
 
         public string DevlverUnString(string mensaje)
