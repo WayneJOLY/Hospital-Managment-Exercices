@@ -105,10 +105,28 @@ namespace Hospital_Interzonal_de_Haedo
             return false;
         }
         //-------------------------FIN    DE  FUNCIONES DE SERVICIO------------------------------------------
+
+        //-------------------------INICIO    DE  FUNCIONES  IMPORTANTES DEL PROYECTO------------------------------------------
+
+        public CEmpleado? BUSCARentreLOSSERVICIOS(uint legajo)
+        {
+            foreach(CServicio servicio in ListaDeServicios)
+            {
+                foreach(CEmpleado empleado in servicio.ListaDeEmpleadosDelServicio)
+                {
+                    if(empleado.GetLegajo() == legajo)
+                    {
+                        return empleado;
+                    }
+                }
+            }
+            return null;
+        }
+        //-------------------------FIN    DE  FUNCIONES IMPORTANTES DEL PROYECTO------------------------------------------
         public string EmpleadosDelHospital()
         {
             string datos = "\n LA LISTA DE LOS EMPLEADOS DEL HOSPITAL";
-            Console.WriteLine("Legajo \tNombre\t\tApellido\tAño de Ingreso Puesto\t");
+            Console.WriteLine("Nombre\tApellido\tLegajo\tAño de Ingreso Puesto\t");
             foreach (CEmpleado empleado in ListaDeTrabajadores)
             {
                 if(empleado is CMedico)
