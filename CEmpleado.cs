@@ -14,7 +14,7 @@ namespace Hospital_Interzonal_de_Haedo
         private uint aniDeIngreso;
         public bool ESTA_EN_UN_SERVIVCIO;
         private static float monto;//
-
+        
 
         public CEmpleado(uint legajo, string nombre, string apellido, uint aniDeIngreso)
         {
@@ -51,7 +51,7 @@ namespace Hospital_Interzonal_de_Haedo
             CEmpleado.monto = monto;
         }
         /*---------------- INICIO HABER MENSUAL ---------------------*/
-        public float HaberMensual()
+        public virtual float HaberMensual()
         {
             float total = 0;
             uint antiguedad = 2024 - aniDeIngreso;

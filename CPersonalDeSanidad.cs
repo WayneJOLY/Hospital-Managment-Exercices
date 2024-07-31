@@ -14,6 +14,10 @@ namespace Hospital_Interzonal_de_Haedo
         private uint aniDeIngreso;
         private string categoriaProfesional;
         private uint numeroDeMatricula;
+
+        private float bono;
+
+
         public CPersonalDeSanidad(uint legajo, string nombre, string apellido, uint aniDeIngreso, string categoriaProfesional, uint numeroDeMatricula) : base(legajo, nombre, apellido, aniDeIngreso)
         {
             this.numeroDeMatricula = numeroDeMatricula;
@@ -27,13 +31,21 @@ namespace Hospital_Interzonal_de_Haedo
         public string GetCategoriaProfesional() {  return categoriaProfesional; }
         public uint GetNumeDeMatricula(uint numeDeMatricula) {  return numeroDeMatricula; }
 
+        /*-------------                     */
+        public  void SetBono(float bono)
+        {
+            this.bono= bono;
+        }
 
+        public override float HaberMensual()
+        {
+            return base.HaberMensual() + bono;
+        }
         public override string ToString()
         {
             string datos=base.ToString();
-            datos += "\t CATEGORIA  " + this.categoriaProfesional + "\tMATRICULA " + this.numeroDeMatricula;
+            datos += "\t CATEGORIA  " + this.categoriaProfesional + "\tMATRICULA " + this.numeroDeMatricula  + "\t BONO :"+ this.bono.ToString()+ "\t Antes de bono :"+ base.HaberMensual().ToString();
             return datos;
-
         }
     }
 }

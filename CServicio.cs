@@ -13,6 +13,7 @@ namespace Hospital_Interzonal_de_Haedo
         private string nombreDeServicio;
         private CMedico jefe;
         public ArrayList ListaDeEmpleadosDelServicio;
+        public ArrayList ListaDeConsultoriosDelServicio;
         public CServicio(string codigo, string nombre, CMedico jefe)
         {
             this.codigo = codigo;
@@ -20,6 +21,7 @@ namespace Hospital_Interzonal_de_Haedo
             this.jefe = jefe;
 
             ListaDeEmpleadosDelServicio = new ArrayList();
+            ListaDeConsultoriosDelServicio = new ArrayList();
         }
 
         public string getCodigo() { return this.codigo; }
@@ -97,12 +99,68 @@ namespace Hospital_Interzonal_de_Haedo
 
             return datos;
         }
+
+        public bool AgregarConsultorio(CConsultorio consultorio)
+        {
+            CConsultorio? consul=BuscarConsultorio(consultorio.GetCodigo());
+            if(consul==null)
+            {
+                ListaDeConsultoriosDelServicio.Add(consultorio);
+                return true;
+            }
+            return false;
+        }
+
+        public bool SacarConsultorio(CConsultorio consultorio)
+        {
+            CConsultorio? consul = BuscarConsultorio(consultorio.GetCodigo());
+            if (consul != null)
+            {
+                ListaDeConsultoriosDelServicio.Remove(consul);
+                return true;
+            }
+            return false;
+        }
+        public CConsultorio? BuscarConsultorio(uint codigo)
+        {
+            foreach( CConsultorio consultorio in ListaDeConsultoriosDelServicio)
+            {
+                if(consultorio.GetCodigo() == codigo)
+                {
+                    return consultorio;
+                }
+            }
+            return null;
+        }
+
+        public string ListaDelosConsultorios()
+        {
+            string datos = "LISTA DE CONSULTORIO DEL SERVICIO " + this.nombreDeServicio;
+            foreach(CConsultorio consultorio in ListaDeConsultoriosDelServicio)
+            {
+                datos += consultorio.ToString();
+            }
+            return datos;
+        }
+        public float SumaDeHaberes()
+        {
+            float suma=0;
+
+            foreach (CEmpleado empleado in ListaDeEmpleadosDelServicio)
+            {
+                suma += empleado.HaberMensual();
+               
+            }
+
+            return suma;
+        }
         public override string ToString()
         {
             string datos = "";
             datos += "\n Nombre :" + this.nombreDeServicio + "\nCodigo :" + this.codigo + "\nJefe :" + this.jefe.ToString();
             datos += "\n LISTA DE TRABAJADORES \n";
             datos += ListaDeLosEmpleados();
+            datos += "LA SUMA DE SUS HABERES MENSUAL ES " + SumaDeHaberes().ToString();
             return datos ;
         }
     }
