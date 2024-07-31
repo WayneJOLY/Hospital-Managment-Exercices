@@ -11,11 +11,12 @@ namespace Hospital_Interzonal_de_Haedo
     {
         private ArrayList ListaDeTrabajadores;
         private ArrayList ListaDeServicios;
-
+        private ArrayList ListaDeConsultorios;
         public CHospital()
         {
             ListaDeTrabajadores = new ArrayList();
             ListaDeServicios = new ArrayList();
+            ListaDeConsultorios = new ArrayList();
         }
 
         public CEmpleado? BuscarEmpleado(uint legajo)
@@ -51,6 +52,70 @@ namespace Hospital_Interzonal_de_Haedo
             }
             return false;
         }
+
+        //-------------------------INICIO DE  FUNCIONES DE CONSULTORIO------------------------------------------
+
+        public CConsultorio BuscarConsultorio(uint codigo)
+        {
+            foreach( CConsultorio consultorio in ListaDeConsultorios)
+            {
+                if (consultorio.GetCodigo() == codigo)
+                {
+                    return consultorio;
+                }
+            }
+            return null;
+        }
+
+        public bool AgregarConsultorio(CConsultorio consultorio)
+        {
+            CConsultorio aux=BuscarConsultorio(consultorio.GetCodigo());
+
+            if (aux == null)
+            {
+                ListaDeConsultorios.Add(consultorio);
+                return true;
+            }
+            return false;
+        }
+
+        public bool SacarConsultorio(CConsultorio consultorio)
+        {
+            CConsultorio aux = BuscarConsultorio(consultorio.GetCodigo());
+
+            if (aux != null)
+            {
+                ListaDeConsultorios.Remove(consultorio);
+                return true;
+            }
+            return false;
+        }
+
+
+        public string ListaDeLosConsultoriosDelHospital()
+        {
+            string datos = "\n LISTA DE CONSULTORIOS DEL HOSPITAL ";
+            foreach(CConsultorio consultorio in ListaDeConsultorios)
+            {
+                datos += consultorio.ToString();
+            }
+
+            return datos;
+        }
+
+        public bool AsignarConsultorioASercicio( uint codigo ,string servicio)
+        {
+            CConsultorio consultorio = BuscarConsultorio(codigo);
+            CServicio    service= BuscarServicio(servicio);
+
+            if (service != null  && consultorio != null)
+            {
+                service.AgregarConsultorio(consultorio);
+                return true;
+            }
+            return false;
+        }
+        //-------------------------FIN DE  FUNCIONES DE CONSULTORIO------------------------------------------
 
         //-------------------------INICIO DE  FUNCIONES DE SERVICIO------------------------------------------
 
@@ -121,6 +186,24 @@ namespace Hospital_Interzonal_de_Haedo
                 }
             }
             return null;
+        }
+
+
+        public string LOSSERVICIOSenLasCualesTrabaja(uint legajo)
+        {
+            string servicios = "";
+            foreach (CServicio servicio in ListaDeServicios)
+            {
+                foreach (CEmpleado empleado in servicio.ListaDeEmpleadosDelServicio)
+                {
+                    if (empleado.GetLegajo() == legajo)
+                    {
+                        servicios += "\t,";
+                        servicios += servicio.getNombre();
+                    }
+                }
+            }
+            return servicios;
         }
         //-------------------------FIN    DE  FUNCIONES IMPORTANTES DEL PROYECTO------------------------------------------
         public string EmpleadosDelHospital()

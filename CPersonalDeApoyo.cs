@@ -8,10 +8,10 @@ namespace Hospital_Interzonal_de_Haedo
 {
     public class CPersonalDeApoyo:CEmpleado
     {
-        private uint legajo;
-        private string nombre;
-        private string apellido;
-        private uint aniDeIngreso;
+        //private uint legajo;
+        //private string nombre;
+        //private string apellido;
+        //private uint aniDeIngreso;
         private string puesto;
         public CPersonalDeApoyo(uint legajo, string nombre, string apellido, uint aniDeIngreso,string puesto):base(legajo,nombre,apellido,aniDeIngreso)
         {
