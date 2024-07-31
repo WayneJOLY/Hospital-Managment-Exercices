@@ -14,11 +14,14 @@ namespace Hospital_Interzonal_de_Haedo
             string categoriaProfesional, especialidad;
             uint numeroDeMatricula;
 
+             float bonoMedico, bonoEnfermero, bonoTecnico;
+
             Random rand = new Random();
 
-            Console.WriteLine("Hello, World!");
+            
 
-            char opcion,eleccion;
+            string opcion;
+                char eleccion;
             
             CInterfaz interfaz= new CInterfaz();
             CHospital hospital= new CHospital();
@@ -31,13 +34,14 @@ namespace Hospital_Interzonal_de_Haedo
 
             do
             {
-                opcion=char.Parse(interfaz.MostrarOpcion());
+                //char.Parse()
+                opcion =interfaz.MostrarOpcion();
 
                 switch (opcion)
                 {
-                    case '1':
+                    case "1":
                         break;
-                    case '2':
+                    case "2":
                             Console.WriteLine("Agregar Un Empleado");
 
                         legajo = (uint)rand.Next(1500, 60796);       //interfaz.DevolverUnUint("Ingrese el Legajo de Empleado");
@@ -46,15 +50,30 @@ namespace Hospital_Interzonal_de_Haedo
                         aniDeIngreso = (uint)rand.Next(1970, 2024); //interfaz.DevolverUnUint("Ingrese el Año  de ingreso del Empleado");
 
                             Console.WriteLine("\n QUÉ TIPO DE EMPLEADO QUIERE REGISTRAR ? \n [A] Personal de Sanidad \n [B] Personal de Apoyo ");
-                            eleccion=char.Parse(Console.ReadLine());
-
+                        eleccion = char.Parse(Console.ReadLine());
+                        
                         switch (eleccion)
                         {
-                            case'A':
+                            case'A' :
                                 categoriaProfesional = GenerarCategoriaProfecionalAleatorio(); //interfaz.DevlverUnString("Ingrese la Categoria Profecional");
                                 numeroDeMatricula = (uint)rand.Next(190000, 900000); //interfaz.DevolverUnUint("Ingrese el Numero de Matricula");
                                 CPersonalDeSanidad sanidad= new CPersonalDeSanidad(legajo,nombre,apellido,aniDeIngreso,categoriaProfesional,numeroDeMatricula);
+                                sanidad.SetBono(15000);
                                 hospital.AgregarEmpleado(sanidad);
+
+                                /*-------------------------------------------------------------------*/
+                               // switch(true)
+                               // {
+                               //     case "1":  //Enfermero
+                               //         break;
+                               //     case "2":  //TECNICO
+                               //         break;
+                               //     case "3":  //MEDICO
+                               //         break;
+                               // }
+
+                                /*-------------------------------------------------------------------*/
+
                                 break;
                             case 'B':
                                 puesto = GenerarPuesto(); //interfaz.DevlverUnString("Ingrese el puesto de Empleado");
@@ -64,13 +83,13 @@ namespace Hospital_Interzonal_de_Haedo
                         }
                         
                         break;
-                    case '3':
+                    case "3":
                                 Console.WriteLine("\n -----------    LISTA DE LOS EMPLEADOS DEL HOSPITAL ");
                                 
                                 Console.WriteLine(hospital.EmpleadosDelHospital());
                                 Console.ReadLine();
                         break;
-                    case '4':
+                    case "4":
                                     codigo = (rand.Next(1000, 90000)).ToString(); //interfaz.DevlverUnString("Ingrese el Codigo del Servicio");
                                     NombreDelServicio = GenerarNombreDeSercvicioAleatorio(); //interfaz.DevlverUnString("Ingrese el Nombre del Servicio");
                                     legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de JEFE de Servicio");
@@ -101,25 +120,25 @@ namespace Hospital_Interzonal_de_Haedo
                                     //    Console.WriteLine("El  JEFE DEBE OBLIGATORIAMENTE SER UN MEDICO");
                                     //}
                         break;
-                    case '5':
+                    case "5":
                         legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado");
                         codigo = interfaz.DevlverUnString("Ingrese el Codigo Del Servicio");
                         CEmpleado empleado=hospital.BuscarEmpleado(legajo);
                         CServicio servicio = hospital.BuscarServicio(codigo);
                         hospital.AgregarEmpleadoAServicio(empleado, servicio);
                         break;
-                    case '6':
+                    case "6":
                         codigo = interfaz.DevlverUnString("Ingrese el Codigo Del Servicio");
                         legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado");
                         empleado = hospital.BuscarEmpleado(legajo);
                         servicio = hospital.BuscarServicio(codigo);
-                        if (empleado is CMedico)
+                        if (empleado is CMedico && !empleado.ESTA_EN_UN_SERVIVCIO)
                         {
                             servicio.setJefe((CMedico) empleado);
                         }
                         break;
 
-                    case '7':
+                    case "7":
                         codigo = interfaz.DevlverUnString("Ingrese el Codigo Del Servicio");
                         
                         servicio = hospital.BuscarServicio(codigo);
@@ -133,18 +152,68 @@ namespace Hospital_Interzonal_de_Haedo
                         }
                         Console.ReadKey();
                         break;
-                    case '8':
+                    case "8":
                         legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado");
                         empleado = hospital.BuscarEmpleado(legajo);
+                        if (empleado != null)
+                        {
+                            Console.WriteLine(empleado.ToString());
+                            Console.WriteLine("\n Trabaja En Los siguientes Servicios {0} :", hospital.LOSSERVICIOSenLasCualesTrabaja(empleado.GetLegajo()));
+                            Console.ReadKey();
+                        }
                         break;
-                    case '9':
+                    case "9":
                         legajo = (uint)interfaz.DevolverUnUint("Ingrese el Legajo de Empleado  A Eliminar");
                         empleado = hospital.BuscarEmpleado(legajo);
                         hospital.EliminarEmpleado(empleado);
                         break;
+
+                    case "10":
+                        break;
+
+                    case "11":
+
+                        Console.WriteLine("AGREGAR UN CONSULTORIO");
+                        uint codig = (uint)rand.Next(150, 700);//(uint)interfaz.DevolverUnUint("Ingrese el Codico del Cosultorio");
+                        uint piso = (uint)rand.Next(1, 11);//interfaz.DevolverUnUint("Ingrese el Piso del Cosultorio");
+                        string sector = GenerarEspecialidadMedicaProfecionalAleatorio(); //interfaz.DevlverUnString("Ingrese el Sector del Cosultorio");
+                        CConsultorio consultorio= new CConsultorio(codig, piso,sector);
+                        hospital.AgregarConsultorio(consultorio);
+                        break;
+
+                    case "12":
+                        
+                        codig =  interfaz.DevolverUnUint("Ingrese el Codigo del Cosultorio");
+                        string service = interfaz.DevlverUnString("Ingrese el Codigo del Servicio");
+                        hospital.AsignarConsultorioASercicio(codig, service);
+                        break;
+
+                    case "13":
+                         service = interfaz.DevlverUnString("Ingrese el Codigo del Servicio");      
+                        CServicio ser= hospital.BuscarServicio(service);
+                        if (ser != null)
+                        {
+                            Console.WriteLine(ser.ListaDelosConsultorios());
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("No Se Encontro El Servicio buscado");
+                        }
+                        break;
+
+                    case "14":
+                        Console.WriteLine(hospital.ListaDeLosConsultoriosDelHospital());
+                        Console.ReadKey();
+                        break;
+                    case "15":
+                        Console.WriteLine("LISTA DE LOS SERVICIOS DEL HOSPITAL\n");
+                        Console.WriteLine(hospital.ListaDeServiciosDelHospital());
+                        Console.ReadKey();
+                        break;
                 }
 
-            }while (opcion != '0');
+            }while (opcion != "0");
         }
 
 
