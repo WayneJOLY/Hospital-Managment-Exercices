@@ -29,10 +29,14 @@ namespace Hospital_Interzonal_de_Haedo
 
         //public override float HaberMensual()
         //{
-        //    if( especialidad== "Jefe de Servicio") { return base.HaberMensual() + SetBono*1.5 ; }
-        //    if (especialidad == "Titular") { return base.HaberMensual() + SetBono ; }
-        //    if (especialidad == "Asociado") { return base.HaberMensual() + SetBono *0.8; }
-        //    if (especialidad == "Residente") { return base.HaberMensual() + SetBono * 0.5; }
+        //    if (especialidad == "Jefe de Servicio") { return (flo)base.HaberMensual() * 1.5; }
+        //    else
+        //    if (especialidad == "Titular") { return base.HaberMensual() ; }
+        //    else
+        //    if (especialidad == "Asociado") { return base.HaberMensual()  * 0.8; }
+        //    else
+        //    if (especialidad == "Residente") { return base.HaberMensual() * 0.5; }
+        //    else return base.HaberMensual();
         //}
         public override string ToString()
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,12 +13,85 @@ namespace Hospital_Interzonal_de_Haedo
         private ArrayList ListaDeTrabajadores;
         private ArrayList ListaDeServicios;
         private ArrayList ListaDeConsultorios;
+        private ArrayList ListaDePacientesDelHospital;
         public CHospital()
         {
             ListaDeTrabajadores = new ArrayList();
             ListaDeServicios = new ArrayList();
             ListaDeConsultorios = new ArrayList();
+            ListaDePacientesDelHospital= new ArrayList();
         }
+        /*****************   INICIO PACIENTES       *******************/
+
+
+        public CPaciente BuscarPaciente(string historial)
+        {
+            foreach (CPaciente paciente in ListaDePacientesDelHospital)
+            {
+                if (paciente.GetHistorialClinica() == historial)
+                {
+                    return paciente;
+                }
+
+
+            }
+            return null;
+        }
+
+        public bool AgregarPacienteAlHospital(CPaciente paciente)
+        {
+            CPaciente aux=BuscarPaciente(paciente.GetHistorialClinica());
+            if(aux == null){
+                ListaDePacientesDelHospital.Add(paciente);
+            }
+
+            return false;
+        }
+
+        public string ListaDeLosPacientesDelHospital()
+        {
+            string PAC = "\n LOS PACIENTES DEL HOSPITAL SON :\n";
+            foreach(CPaciente paciente in ListaDePacientesDelHospital)
+            {
+                PAC += paciente.ToString();
+            }
+
+            return PAC;
+        }
+
+
+        public bool AsignarPACIENTEaSERVICIO(string codigo, string servicio)
+        {
+            CPaciente aux = BuscarPaciente(codigo);
+            CServicio service = BuscarServicio(servicio);
+
+            if (service != null && aux != null)
+            {
+                service.AgregarPacienteAlSercicio(aux);
+                return true;
+            }
+            return false;
+        }
+
+
+        public string LOSSERVICIOSenLasCualesEstaESEPACINTE(string legajo)
+        {
+            string servicios = "";
+            foreach (CServicio servicio in ListaDeServicios)
+            {
+                foreach (CPaciente paciente in servicio.LISTADEPACIENTES)
+                {
+                    if (paciente.GetHistorialClinica() == legajo)
+                    {
+                        servicios += "\t,";
+                        servicios += servicio.getNombre();
+                    }
+                }
+            }
+            return servicios;
+        }
+
+        /*****************   fin PACIENTES       *******************/
 
         public CEmpleado? BuscarEmpleado(uint legajo)
         {

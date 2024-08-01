@@ -14,6 +14,7 @@ namespace Hospital_Interzonal_de_Haedo
         private CMedico jefe;
         public ArrayList ListaDeEmpleadosDelServicio;
         public ArrayList ListaDeConsultoriosDelServicio;
+        public ArrayList LISTADEPACIENTES;
         public CServicio(string codigo, string nombre, CMedico jefe)
         {
             this.codigo = codigo;
@@ -22,8 +23,46 @@ namespace Hospital_Interzonal_de_Haedo
 
             ListaDeEmpleadosDelServicio = new ArrayList();
             ListaDeConsultoriosDelServicio = new ArrayList();
+            LISTADEPACIENTES = new ArrayList();
+        }
+        /********************************************************************************/
+
+        public CPaciente BuscarPaciente(string historial)
+        {
+            foreach (CPaciente paciente in LISTADEPACIENTES)
+            {
+                if (paciente.GetHistorialClinica() == historial)
+                {
+                    return paciente;
+                }
+
+
+            }
+            return null;
         }
 
+        public bool AgregarPacienteAlSercicio(CPaciente paciente)
+        {
+            CPaciente aux = BuscarPaciente(paciente.GetHistorialClinica());
+            if (aux == null)
+            {
+                LISTADEPACIENTES.Add(paciente);
+            }
+
+            return false;
+        }
+
+        public string ListaDeLosPacientesDelHospital()
+        {
+            string PAC = "\n LOS PACIENTES DEL HOSPITAL SON :\n";
+            foreach (CPaciente paciente in LISTADEPACIENTES)
+            {
+                PAC += paciente.ToString();
+            }
+
+            return PAC;
+        }
+        /*****************************************************************************************************/
         public string getCodigo() { return this.codigo; }
         public string getNombre() { return this.nombreDeServicio; }
         public CMedico getJefe() { return this.jefe; }
