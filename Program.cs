@@ -169,6 +169,10 @@ namespace Hospital_Interzonal_de_Haedo
                         break;
 
                     case "10":
+                        Console.WriteLine("\t\t\t DATOS DEL HOSPITAL \n\n");
+                        Console.WriteLine(hospital.ListaDeServiciosDelHospital());
+                        Console.WriteLine(hospital.ListaDeLosConsultoriosDelHospital());
+                        Console.ReadKey();
                         break;
 
                     case "11":
@@ -210,6 +214,36 @@ namespace Hospital_Interzonal_de_Haedo
                         Console.WriteLine("LISTA DE LOS SERVICIOS DEL HOSPITAL\n");
                         Console.WriteLine(hospital.ListaDeServiciosDelHospital());
                         Console.ReadKey();
+                        break;
+/************************************************************************************************************************/
+
+
+
+                    case "16":
+
+                        string historia = (rand.Next(779999, 997777)).ToString();//interfaz.DevlverUnString("Ingrese el Numero de historial del Paciente");
+                        uint dni = (uint)rand.Next(99999, 997777);//(uint)interfaz.DevolverUnUint("Ingrese el DNI del del Paciente");
+                        nombre = GenerarNombreAleatorio();//interfaz.DevlverUnString("Ingrese el Nombre del Paciente");
+                        apellido = (GenerarApellidoAleatorio()).ToUpper(); //interfaz.DevlverUnString("Ingrese el Apellido del Paciente");
+                        uint fecha = (uint)rand.Next(1999, 2024);//(uint)interfaz.DevolverUnUint("Ingrese la Fecha de Nacimiento del Paciente ");
+                        char sexo=char.Parse( interfaz.DevlverUnString("Ingrese el Sexo  Paciente"));
+                        CPaciente paciente = new CPaciente(historia, nombre, apellido, dni, fecha,sexo);
+                        hospital.AgregarPacienteAlHospital(paciente);
+                        break;
+                    case "17":
+                        Console.WriteLine(hospital.ListaDeLosPacientesDelHospital());
+                        Console.ReadKey();
+                        break;
+                    case "18":
+                        string cod = interfaz.DevlverUnString("Ingrese el Numero de historial del Paciente");
+                        string serv = interfaz.DevlverUnString("Ingrese el Codigo del Servicio");
+
+                        hospital.AsignarPACIENTEaSERVICIO(cod, serv);
+                        break;
+                    case "19":
+                        string codi = interfaz.DevlverUnString("Ingrese el Numero de historial del Paciente");
+
+                       Console.WriteLine(hospital.LOSSERVICIOSenLasCualesEstaESEPACINTE(codi));
                         break;
                 }
 
