@@ -37,6 +37,12 @@ namespace Hospital_Interzonal_de_Haedo
             Console.WriteLine("[13] Motrar la lista de  Consultorios de un Servicio ");
             Console.WriteLine("[14] Lista  de Consultorios  del Hospital");
             Console.WriteLine("[15] Listar de todos los Datos de los SERVICIOS del Hospital ");
+
+
+            Console.WriteLine("[16] AgregarPacienteAlHospital ");
+            Console.WriteLine("[17] Motrar la lista de los Paciente de Hospital ");
+            Console.WriteLine("[18] Agregar Paciente a Sercvicio");
+            Console.WriteLine("[19] Lista de Sercicios En Las Cuales esta El paciente ");
             return DarOpcion("Ingrese la Opcion Elegida");
         }
 
